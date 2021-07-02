@@ -1,0 +1,22 @@
+{
+  "name": "event-manager-api",
+  "version": "0.1.0",
+  "description": "Serverless API for the Event Manager App",
+  "main": "handler.js",
+  "scripts": {
+    "test": "serverless-bundle test"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.64",
+    "@types/jest": "^26.0.14",
+    "aws-sdk": "^2.939.0",
+    "serverless-bundle": "3.2.1",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-offline": "^6.8.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
