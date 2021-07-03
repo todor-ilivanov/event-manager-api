@@ -36,4 +36,13 @@ functions:
       - http:
           path: create
           method: post
+          authorizer: aws_iam
+
+  getAllEvents:
+    handler: getAllEvents.getAllEvents
+    events:
+      - http:
+          path: events
+          method: get
+          authorizer: aws_iam
 

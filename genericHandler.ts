@@ -7,17 +7,20 @@ type APIResponse = {
     body: string;
 };
 
-type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventResponse>;
+type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventResponse | EventResponse[]>;
 type ValidationFn = (event: APIGatewayEvent) => ValidationResult;
 
-export const handler = (lambda: Lambda, validationFn: ValidationFn) => {
+export const handler = (lambda: Lambda, validationFn?: ValidationFn) => {
     return async (event: APIGatewayEvent, context: Context) => {
         const apiResponse: APIResponse = {} as APIResponse;
-        const requestValidation = validationFn(event);
-        if(requestValidation.isValid === false) {
-            apiResponse.body = JSON.stringify({ errors: requestValidation.errorMessages });
-            apiResponse.statusCode = 400;
-            return apiResponse;
+
+        if(validationFn !== undefined) {
+            const requestValidation = validationFn(event);
+            if(requestValidation.isValid === false) {
+                apiResponse.body = JSON.stringify({ errors: requestValidation.errorMessages });
+                apiResponse.statusCode = 400;
+                return apiResponse;
+            }
         }
 
         try {

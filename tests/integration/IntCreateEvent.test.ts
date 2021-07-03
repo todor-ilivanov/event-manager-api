@@ -1,6 +1,6 @@
 import { APIGatewayEvent, Context } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { cleanUp, getNewItemFromDb } from '../testutils/dynamoDbUtils';
 import { createEvent } from '../../createEvent';
 import { mockSuccessfulCreationRequest } from '../__mocks__/mockRequestObjects';
 
@@ -22,25 +22,9 @@ describe('test event creation', () => {
         const userId = JSON.parse(response.body).userId;
         const newEventId = JSON.parse(response.body).eventId;
 
-        const result = await dynamoDbClient.get({
-            TableName: process.env.tableName,
-            Key: {
-                userId: userId,
-                eventId: newEventId
-            },
-        }).promise();
+        const result = await getNewItemFromDb(dynamoDbClient, userId, newEventId);
 
         expect(result.Item.headline).toBe('Test event');
         await cleanUp(dynamoDbClient, userId, newEventId);
     });
 });
-
-const cleanUp = async (dynamoDbClient: DocumentClient, userId: string, eventId: string) => {
-    await dynamoDbClient.delete({
-        TableName: process.env.tableName,
-        Key: {
-            userId: userId,
-            eventId: eventId
-        },
-    }).promise();
-}
