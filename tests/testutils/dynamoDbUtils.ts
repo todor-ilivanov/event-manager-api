@@ -15,7 +15,7 @@ export const populateDbWithEvents = async (
     events: EventDTO[]
 ): Promise<BatchWriteItemOutput> => {
 
-    var params = {
+    const params = {
         RequestItems: {
             'event-manager-table-test': 
                 events.map((event, index) => {

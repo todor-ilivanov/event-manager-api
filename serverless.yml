@@ -29,6 +29,9 @@ provider:
         - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:eu-west-2:*:*"
 
+resources:
+  - ${file(resources/api-gateway-errors.yml)}
+
 functions:
   createEvent:
     handler: createEvent.createEvent
@@ -36,6 +39,7 @@ functions:
       - http:
           path: create
           method: post
+          cors: true
           authorizer: aws_iam
 
   getAllEvents:
@@ -44,5 +48,6 @@ functions:
       - http:
           path: events
           method: get
+          cors: true
           authorizer: aws_iam
 
