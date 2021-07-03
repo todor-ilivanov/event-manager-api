@@ -1,4 +1,4 @@
-export type EventResponse = {
+export type EventDTO = {
     userId: string | undefined;
     eventId: string | undefined;
     headline: string;
@@ -6,5 +6,5 @@ export type EventResponse = {
     startDate: string;
     endDate: string;
     imageUrl: string;
-    location: string;
+    city: string;
 };

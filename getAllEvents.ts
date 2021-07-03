@@ -1,14 +1,14 @@
 import { APIGatewayEvent, Context } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
-import { handler } from 'genericHandler';
-import { EventResponse } from 'models/eventResponses';
+import { handler } from './genericHandler';
+import { EventDTO } from './models/event';
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const getAllEvents = handler(async (
     event: APIGatewayEvent,
     context: Context
-): Promise<EventResponse[]> => {
+): Promise<EventDTO[]> => {
     const params = {
         TableName: process.env.tableName,
         KeyConditionExpression: 'userId = :userId',
@@ -19,5 +19,5 @@ export const getAllEvents = handler(async (
 
     const result = await dynamoDb.query(params).promise();
 
-    return result.Items.map(item => item as EventResponse);
+    return result.Items.map(item => item as EventDTO);
 });

@@ -1,6 +1,6 @@
 import { APIGatewayEvent } from 'aws-lambda';
 
-export const buildMockCreationRequest = (mockRequest: object): APIGatewayEvent => {
+export const buildMockRequest = (mockRequest: object): APIGatewayEvent => {
     return {
         body: JSON.stringify(mockRequest), requestContext: {
             identity: {

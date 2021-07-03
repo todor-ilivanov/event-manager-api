@@ -1,14 +1,17 @@
-import { APIGatewayEvent, Context } from 'aws-lambda';
+import { Context } from 'aws-lambda';
 import { createEvent } from '../../createEvent';
 import { DynamoDB } from 'aws-sdk';
 import { mockBadCreationRequest, mockSuccessfulCreationRequest } from '../__mocks__/mockRequestObjects';
-import { buildMockCreationRequest } from '../testutils/eventBuilders';
+import { buildMockRequest } from '../testutils/eventBuilders';
 
-describe('test event creation', () => {
+describe('createEvents lambda', () => {
 
-    it('test event creation success', async () => {
+    beforeAll(() => {
         process.env.tableName = 'mock-table-name';
-        const event = buildMockCreationRequest(mockSuccessfulCreationRequest);
+    });
+
+    it('creates a new event when a valid request is passed', async () => {
+        const event = buildMockRequest(mockSuccessfulCreationRequest);
         const context = {} as Context;
 
         const dynamoDbMockPut = jest.fn().mockImplementation(() =>
@@ -21,8 +24,8 @@ describe('test event creation', () => {
         expect(dynamoDbMockPut).toHaveBeenCalled();
     });
 
-    it('test event creation bad request', async () => {
-        const event = buildMockCreationRequest(mockBadCreationRequest);
+    it('fails when the request doesn\'t pass validation', async () => {
+        const event = buildMockRequest(mockBadCreationRequest);
         const context = {} as Context;
 
         const response = await createEvent(event, context);

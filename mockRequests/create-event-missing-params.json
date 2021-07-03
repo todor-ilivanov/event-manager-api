@@ -1,5 +1,5 @@
 {
-  "body": "{\"headline\":\"AWS Tech Talk\",\"endDate\": \"03/07/2021\", \"imageUrl\":\"s3Location.com\", \"location\": \"Plovdiv\"}",
+  "body": "{\"headline\":\"AWS Tech Talk\",\"endDate\": \"03/07/2021\", \"imageUrl\":\"s3Location.com\", \"city\": \"Plovdiv\"}",
     "requestContext": {
     "identity": {
       "cognitoIdentityId": "TEST-USER-1234"

@@ -2,7 +2,7 @@ import { handler } from './genericHandler';
 import { Context, APIGatewayEvent } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import * as uuid from 'uuid';
-import { EventResponse } from './models/eventResponses';
+import { EventDTO } from './models/event';
 import { validateCreateRequest } from './utils/requestValidation';
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -10,7 +10,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 export const createEvent = handler(async (
     event: APIGatewayEvent,
     context: Context
-): Promise<EventResponse> => {
+): Promise<EventDTO> => {
     const data = JSON.parse(event.body);
 
     const params = {
@@ -23,7 +23,7 @@ export const createEvent = handler(async (
             startDate: data.startDate,
             endDate: data.endDate,
             imageUrl: data.imageUrl,
-            location: data.location
+            city: data.city
         }
     };
 

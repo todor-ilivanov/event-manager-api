@@ -1,10 +1,11 @@
-import { APIGatewayEvent, Context } from 'aws-lambda';
+import { Context } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import { cleanUp, getNewItemFromDb } from '../testutils/dynamoDbUtils';
 import { createEvent } from '../../createEvent';
 import { mockSuccessfulCreationRequest } from '../__mocks__/mockRequestObjects';
+import { buildMockRequest } from '../testutils/eventBuilders';
 
-describe('test event creation', () => {
+describe('createEvent lambda integration test', () => {
 
     const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
@@ -13,9 +14,9 @@ describe('test event creation', () => {
         process.env.AWS_REGION = 'eu-west-2';
     });
 
-    it('test event creation and retrieval', async () => {
+    it('events are created successfully in the test dynamo db instance', async () => {
 
-        const event = { body: JSON.stringify(mockSuccessfulCreationRequest) } as APIGatewayEvent;
+        const event = buildMockRequest(mockSuccessfulCreationRequest);
         const context = {} as Context;
 
         const response = await createEvent(event, context);

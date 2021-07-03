@@ -8,7 +8,7 @@ export type ValidationResult = {
 export const validateCreateRequest = (event: APIGatewayEvent): ValidationResult => {
     const data = JSON.parse(event.body);
 
-    const parameters = ['headline', 'description', 'startDate', 'endDate', 'imageUrl', 'location'];
+    const parameters = ['headline', 'description', 'startDate', 'endDate', 'imageUrl', 'city'];
     const errorMessages = parameters
         .filter(param => data[param] === undefined)
         .map(param => `Missing parameter: ${param}`);

@@ -4,11 +4,11 @@ export const mockSuccessfulCreationRequest = {
     startDate: '03/07/2021',
     endDate: '04/07/2021',
     imageUrl: 'someurl.com',
-    location: 'Plovdiv'
+    city: 'Plovdiv'
 };
 
 export const mockBadCreationRequest = {
     headline: 'Test event',
     description: 'Event for writing the best tests',
-    location: 'Plovdiv'
+    city: 'Plovdiv'
 };

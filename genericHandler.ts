@@ -1,5 +1,5 @@
 import { Context, APIGatewayEvent } from "aws-lambda";
-import { EventResponse } from 'models/eventResponses';
+import { EventDTO } from 'models/event';
 import { ValidationResult } from 'utils/requestValidation';
 
 type APIResponse = {
@@ -7,7 +7,7 @@ type APIResponse = {
     body: string;
 };
 
-type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventResponse | EventResponse[]>;
+type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventDTO | EventDTO[]>;
 type ValidationFn = (event: APIGatewayEvent) => ValidationResult;
 
 export const handler = (lambda: Lambda, validationFn?: ValidationFn) => {
@@ -28,6 +28,7 @@ export const handler = (lambda: Lambda, validationFn?: ValidationFn) => {
             apiResponse.body = JSON.stringify(lambdaResult);
             apiResponse.statusCode = 200;
         } catch(error) {
+            console.log(error)
             apiResponse.body = JSON.stringify({ error: error.message });
             apiResponse.statusCode = 500;
         }
