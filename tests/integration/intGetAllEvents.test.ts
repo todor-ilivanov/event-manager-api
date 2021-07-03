@@ -5,7 +5,6 @@ import { getAllEvents } from '../../getAllEvents';
 import { buildMockRequest } from '../testutils/eventBuilders';
 import { EventDTO } from 'models/event';
 
-
 describe('getAllEvents lambda integration test', () => {
 
     const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
