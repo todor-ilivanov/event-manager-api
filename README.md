@@ -1,4 +1,4 @@
-# Serverless TypeScript Starter
+# Event Manager API
 
 A Serverless API for the Event Manager App, built using the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle).
 Consumed by the [event-manager-app UI](https://github.com/todor-ilivanov/event-manager-app).
