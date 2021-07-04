@@ -16,7 +16,7 @@ export const handler = (lambda: Lambda, validationFn?: ValidationFn) => {
         const apiResponse: APIResponse = {} as APIResponse;
         apiResponse.headers = {
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": true,
+            "Access-Control-Allow-Credentials": true
         };
 
         if(validationFn !== undefined) {
