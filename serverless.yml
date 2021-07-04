@@ -1,0 +1,53 @@
+service: event-manager-api
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-2
+
+  environment:
+    tableName: event-manager-table
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:eu-west-2:*:*"
+
+resources:
+  - ${file(resources/api-gateway-errors.yml)}
+
+functions:
+  createEvent:
+    handler: createEvent.createEvent
+    events:
+      - http:
+          path: create
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getAllEvents:
+    handler: getAllEvents.getAllEvents
+    events:
+      - http:
+          path: events
+          method: get
+          cors: true
+          authorizer: aws_iam
+
