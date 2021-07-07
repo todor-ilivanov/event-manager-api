@@ -17,7 +17,7 @@ To deploy, run `serverless deploy --stage=ENV`, where ENV is replaced by the tar
 ### Running the lambdas locally
 Assuming the correct AWS credentials have been supplied, running the following commands invokes the lambdas locally:
 
-* createEvents: `serverless invoke local --function createEvent --path mockRequests/create-event.json`
+* createEvent: `serverless invoke local --function createEvent --path mockRequests/create-event.json`
 * getAllEvents: `serverless invoke local --function getAllEvents --path mockRequests/get-all-events.json`
 
 Note: a cognito user id needs to be supplied as part of the request:
@@ -28,6 +28,8 @@ Note: a cognito user id needs to be supplied as part of the request:
     }
   }
  ```
+#### Weather Lambda
+The API key needs to be set as an environment variable (e.g. in the .env file) - `OPEN_WEATHER_MAP_API_KEY` - so that the weather lambda is able to make requests to the endpoint.
 
 ### Unit Tests
 

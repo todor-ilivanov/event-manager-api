@@ -1,5 +1,6 @@
 import { Context, APIGatewayEvent } from "aws-lambda";
 import { EventDTO } from 'models/event';
+import { WeatherResponse } from 'models/weatherResponse';
 import { ValidationResult } from 'utils/requestValidation';
 
 type APIResponse = {
@@ -8,7 +9,7 @@ type APIResponse = {
     headers: { [key: string]: string | boolean };
 };
 
-type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventDTO | EventDTO[]>;
+type Lambda = (event: APIGatewayEvent, context: Context) => Promise<EventDTO | EventDTO[] | WeatherResponse>;
 type ValidationFn = (event: APIGatewayEvent) => ValidationResult;
 
 export const handler = (lambda: Lambda, validationFn?: ValidationFn) => {

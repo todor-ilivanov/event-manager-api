@@ -3,7 +3,7 @@ import { mockDynamoDbQuery } from '../testutils/dynamoDbUtils';
 import { getAllEvents } from '../../getAllEvents';
 import { buildMockRequest } from '../testutils/eventBuilders';
 
-describe('getAllEventsLambda', () => {
+describe('getAllEvents lambda', () => {
 
     beforeAll(() => {
         process.env.tableName = 'mock-table-name';

@@ -40,7 +40,11 @@ export const populateDbWithEvents = async (
     return await dynamoDbClient.batchWrite(params).promise();
 };
 
-export const getNewItemFromDb = async (dynamoDbClient: DocumentClient, userId: string, eventId: string): Promise<GetItemOutput> => {
+export const getNewItemFromDb = async (
+    dynamoDbClient: DocumentClient,
+    userId: string,
+    eventId: string
+): Promise<GetItemOutput> => {
     return await dynamoDbClient.get({
         TableName: process.env.tableName,
         Key: {
@@ -50,7 +54,11 @@ export const getNewItemFromDb = async (dynamoDbClient: DocumentClient, userId: s
     }).promise();
 };
 
-export const cleanUp = async (dynamoDbClient: DocumentClient, userId: string, eventId: string) => {
+export const cleanUp = async (
+    dynamoDbClient: DocumentClient,
+    userId: string,
+    eventId: string
+) => {
     await dynamoDbClient.delete({
         TableName: process.env.tableName,
         Key: {
@@ -60,7 +68,11 @@ export const cleanUp = async (dynamoDbClient: DocumentClient, userId: string, ev
     }).promise();
 };
 
-export const cleanUpMultiple = async (dynamoDbClient: DocumentClient, userId: string, events: EventDTO[]) => {
+export const cleanUpMultiple = async (
+    dynamoDbClient: DocumentClient,
+    userId: string,
+    events: EventDTO[]
+) => {
     return Promise.all(
         events.map(async (event) =>
             await cleanUp(dynamoDbClient, userId, event.eventId)

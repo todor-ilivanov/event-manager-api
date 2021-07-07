@@ -16,6 +16,7 @@ provider:
 
   environment:
     tableName: event-manager-table
+    weatherApiKey: ${env:OPEN_WEATHER_MAP_API_KEY}
 
   iamRoleStatements:
     - Effect: Allow
@@ -50,4 +51,16 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  weather:
+    handler: weather.getWeather
+    events:
+      - http:
+          path: weather
+          method: get
+          cors: true
+          authorizer: aws_iam
+    request:
+      template:
+      application/json: '{ "city" : "$input.params(''city'')" }'
 

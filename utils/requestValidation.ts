@@ -5,10 +5,9 @@ export type ValidationResult = {
     errorMessages: string[];
 };
 
-export const validateCreateRequest = (event: APIGatewayEvent): ValidationResult => {
+const validateMissingParams = (event: APIGatewayEvent, parameters: string[]): ValidationResult => {
     const data = JSON.parse(event.body);
 
-    const parameters = ['headline', 'description', 'startDate', 'endDate', 'imageUrl', 'city'];
     const errorMessages = parameters
         .filter(param => data[param] === undefined)
         .map(param => `Missing parameter: ${param}`);
@@ -17,4 +16,9 @@ export const validateCreateRequest = (event: APIGatewayEvent): ValidationResult 
         { isValid: false, errorMessages: errorMessages } : { isValid: true, errorMessages: [] };
 
     return validationResult;
+};
+
+export const validateCreateRequest = (event: APIGatewayEvent): ValidationResult => {
+    const parameters = ['headline', 'description', 'startDate', 'endDate', 'imageUrl', 'city'];
+    return validateMissingParams(event, parameters);
 };
