@@ -7,6 +7,7 @@ Consumed by the [event-manager-app UI](https://github.com/todor-ilivanov/event-m
 
 * `/create` - given an event as JSON, creates an event with the ID of the currently authenticated user
 * `/getAllEvents` - gets all events from a DynamoDB belonging to the currently authenticated user
+* `/weather` - given a city as a query parameter, it calls the OpenWeatherMap API to fetch and parse weather data
 
 ## Deployment
 The lambdas are bundled by Webpack and the builds are uploaded to an S3 bucket. 
@@ -19,6 +20,7 @@ Assuming the correct AWS credentials have been supplied, running the following c
 
 * createEvent: `serverless invoke local --function createEvent --path mockRequests/create-event.json`
 * getAllEvents: `serverless invoke local --function getAllEvents --path mockRequests/get-all-events.json`
+* weather: `serverless invoke local --function weather --path mockRequests/weather.json`
 
 Note: a cognito user id needs to be supplied as part of the request:
 ```json

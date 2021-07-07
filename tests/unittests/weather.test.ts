@@ -1,4 +1,4 @@
-import { Context } from 'aws-lambda';
+import { APIGatewayEvent, Context } from 'aws-lambda';
 import axios from 'axios';
 import { WeatherResponse } from 'models/weatherResponse';
 import { getWeather } from '../../weather';
@@ -15,8 +15,8 @@ const mockOpenWeatherAPIResponse = {
 };
 
 const invokeWeatherLambda = async (): Promise<WeatherResponse> => {
-    const event = { queryStringParameters: { city: "Sofia" } };
-    //@ts-ignore doesnt recognize the queryStringParameters param as part of as APIGatewayEvent
+    const event = {} as APIGatewayEvent;
+    event.queryStringParameters = { city: 'Sofia' };
     const response = await getWeather(event, {} as Context);
     const responseBody = JSON.parse(response.body) as WeatherResponse;
     return responseBody;
