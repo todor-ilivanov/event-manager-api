@@ -21,7 +21,12 @@ export const getWeather = handler(async (
             { params: { q: city, appid: process.env.weatherApiKey } }
         );
         const weatherData = response.data;
-        return { city: city, degreesC: convertKtoC(weatherData.main.temp), icon: weatherData.weather[0].icon } as WeatherResponse;
+        return {
+            city: city,
+            degreesC: convertKtoC(weatherData.main.temp),
+            description: weatherData.weather[0].main,
+            icon: weatherData.weather[0].icon
+        } as WeatherResponse;
     } catch(error) {
         return { error: error.message } as WeatherResponse;
     }

@@ -6,6 +6,7 @@ import { getWeather } from '../../weather';
 const mockOpenWeatherAPIResponse = {
     "weather": [
         {
+            "main": "Clear",
             "icon": "01n"
         }
     ],
@@ -30,6 +31,7 @@ describe('weather lambda', () => {
         expect(response.city).toBe('Sofia');
         expect(response.degreesC).toEqual(16.83);
         expect(response.icon).toBe('01n');
+        expect(response.description).toBe('Clear');
     });
 
     it('returns an error response when the API call fails', async () => {
