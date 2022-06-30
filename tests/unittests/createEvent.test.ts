@@ -1,5 +1,5 @@
 import { Context } from 'aws-lambda';
-import { createEvent } from '../../createEvent';
+import { createEvent } from '../../src/createEvent';
 import { DynamoDB } from 'aws-sdk';
 import { mockBadCreationRequest, mockSuccessfulCreationRequest } from '../__mocks__/mockRequestObjects';
 import { buildMockRequest } from '../testutils/eventBuilders';

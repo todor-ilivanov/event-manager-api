@@ -1,7 +1,7 @@
 import { Context } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import { cleanUp, getNewItemFromDb } from '../testutils/dynamoDbUtils';
-import { createEvent } from '../../createEvent';
+import { createEvent } from '../../src/createEvent';
 import { mockSuccessfulCreationRequest } from '../__mocks__/mockRequestObjects';
 import { buildMockRequest } from '../testutils/eventBuilders';
 

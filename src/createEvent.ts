@@ -2,8 +2,8 @@ import { handler } from './genericHandler';
 import { Context, APIGatewayEvent } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import * as uuid from 'uuid';
-import { EventDTO } from './models/event';
-import { validateCreateRequest } from './utils/requestValidation';
+import { EventDTO } from '../models/event';
+import { validateCreateRequest } from '../utils/requestValidation';
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
